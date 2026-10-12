@@ -8,20 +8,26 @@ data class CartItem(
 
 object CartManager {
     val items = mutableListOf<CartItem>()
+    var onCartUpdatedListener: (() -> Unit)? = null
 
     fun addItem(item: CartItem) {
         items.add(item)
+        onCartUpdatedListener?.invoke()
     }
 
     fun removeItemAt(index: Int) {
         if (index in items.indices) {
             items.removeAt(index)
+            onCartUpdatedListener?.invoke()
         }
     }
 
     fun clear() {
         items.clear()
+        onCartUpdatedListener?.invoke()
     }
+
+    fun getItemCount(): Int = items.size
 
     fun getSubtotal(): Double {
         return items.sumOf { it.price }
@@ -47,13 +53,18 @@ object CartManager {
         }
     }
 
+    fun getVat(): Double {
+        val discountedSubtotal = getSubtotal() - getDiscount()
+        return if (items.isEmpty()) 0.0 else (discountedSubtotal * 0.15)
+    }
+
     fun getFees(): Double {
-        val subtotal = getSubtotal()
-        return if (items.isEmpty()) 0.0 else (20.0 + subtotal * 0.025)
+        val discountedSubtotal = getSubtotal() - getDiscount()
+        return if (items.isEmpty()) 0.0 else (20.0 + discountedSubtotal * 0.025)
     }
 
     fun getGrandTotal(): Double {
-        val total = getSubtotal() - getDiscount() + getFees()
+        val total = getSubtotal() - getDiscount() + getVat() + getFees()
         return if (total < 0) 0.0 else total
     }
 }

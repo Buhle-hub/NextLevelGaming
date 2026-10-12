@@ -26,6 +26,12 @@ class MainActivity : AppCompatActivity() {
         // Restore saved session from local storage if available
         UserSessionManager.initSession(this)
 
+        // Listen for Cart updates to keep increasing mini badge updated
+        CartManager.onCartUpdatedListener = {
+            updateCartBadge()
+        }
+        updateCartBadge()
+
         // 1. Splash Screen Phase-In Animation
         startSplashPhaseInAnimation()
 
@@ -80,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         // Highlight active bottom nav tab and update drawer items dynamically based on session
         navController.addOnDestinationChangedListener { _, destination, _ ->
             updateMenuForSession()
+            updateCartBadge()
             resetBottomTabs()
 
             when (destination.id) {
@@ -109,6 +116,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun updateCartBadge() {
+        val count = CartManager.getItemCount()
+        if (count > 0) {
+            binding.tvCartBadge.visibility = View.VISIBLE
+            binding.tvCartBadge.text = count.toString()
+        } else {
+            binding.tvCartBadge.visibility = View.GONE
+        }
     }
 
     private fun updateMenuForSession() {

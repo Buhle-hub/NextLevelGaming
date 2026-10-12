@@ -57,12 +57,14 @@ class CartFragment : Fragment() {
         val subtotal = CartManager.getSubtotal()
         val discount = CartManager.getDiscount()
         val discountPercent = CartManager.getDiscountPercent()
+        val vat = CartManager.getVat()
         val fees = CartManager.getFees()
         val grandTotal = CartManager.getGrandTotal()
 
         binding.tvSubtotal.text = String.format(Locale.US, "R%.2f", subtotal)
         binding.tvDiscountLabel.text = if (discountPercent > 0) "Discount ($discountPercent%):" else "Discount:"
         binding.tvDiscount.text = String.format(Locale.US, "-R%.2f", discount)
+        binding.tvVat.text = String.format(Locale.US, "R%.2f", vat)
         binding.tvFees.text = String.format(Locale.US, "R%.2f", fees)
         binding.tvGrandTotal.text = String.format(Locale.US, "R%.2f", grandTotal)
     }

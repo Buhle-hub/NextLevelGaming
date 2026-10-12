@@ -105,7 +105,7 @@ class SignInFragment : Fragment() {
             }
 
             if (isValid) {
-                val (success, message) = UserSessionManager.loginUser(identifier, pass)
+                val (success, message) = UserSessionManager.loginUser(requireContext(), identifier, pass)
                 if (success) {
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.ProfileFragment)
@@ -145,7 +145,7 @@ class SignInFragment : Fragment() {
             }
 
             if (isValid) {
-                val user = UserSessionManager.registerUser(username, pass)
+                val user = UserSessionManager.registerUser(requireContext(), username, pass)
                 Toast.makeText(context, "Account created successfully for $username!", Toast.LENGTH_SHORT).show()
 
                 // Trigger interactive welcome email from dior.dynasty54@gmail.com

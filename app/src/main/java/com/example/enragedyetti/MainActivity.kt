@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
+        // Restore saved session from local storage if available
+        UserSessionManager.initSession(this)
+
         // 1. Splash Screen Phase-In Animation
         startSplashPhaseInAnimation()
 
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.EnquiryFragment)
         }
 
-        // 3. Bottom Navigation Bar Clicks (Matching Behance UI Layout)
+        // 3. Bottom Navigation Bar Clicks
         binding.tabHome.setOnClickListener {
             navController.navigate(R.id.HomeFragment)
         }
@@ -74,8 +77,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Highlight active bottom nav tab
+        // Highlight active bottom nav tab and update drawer items dynamically based on session
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            updateMenuForSession()
             resetBottomTabs()
 
             when (destination.id) {
@@ -105,6 +109,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun updateMenuForSession() {
+        val menu = binding.navView.menu
+        if (UserSessionManager.isLoggedIn()) {
+            // Hide Sign In item after logging in
+            menu.findItem(R.id.SignInFragment)?.isVisible = false
+            menu.findItem(R.id.ProfileFragment)?.apply {
+                isVisible = true
+                title = "My Account (${UserSessionManager.getCurrentUsername()})"
+            }
+        } else {
+            // Show Sign In item when logged out
+            menu.findItem(R.id.SignInFragment)?.isVisible = true
+            menu.findItem(R.id.ProfileFragment)?.isVisible = false
+        }
     }
 
     private fun resetBottomTabs() {

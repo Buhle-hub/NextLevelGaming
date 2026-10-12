@@ -38,21 +38,50 @@ data class SavedCard(
 )
 
 object UserSessionManager {
+    private const val PREFS_NAME = "nextlvl_session_prefs"
+    private const val KEY_IS_LOGGED_IN = "is_logged_in"
+    private const val KEY_USERNAME = "saved_username"
+    private const val KEY_EMAIL = "saved_email"
+
     var currentUser: UserAccount? = null
     val registeredAccounts = mutableListOf<UserAccount>()
     var tempSignUpContact: String = ""
     var tempSignUpMethod: String = "email"
 
-    init {
-        registeredAccounts.clear()
+    fun initSession(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isLoggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false)
+        if (isLoggedIn) {
+            val username = prefs.getString(KEY_USERNAME, "") ?: ""
+            val email = prefs.getString(KEY_EMAIL, "") ?: ""
+            if (username.isNotEmpty()) {
+                val user = registeredAccounts.find { it.username.equals(username, ignoreCase = true) }
+                    ?: UserAccount(username = username, email = email).also { registeredAccounts.add(it) }
+                currentUser = user
+            }
+        }
+    }
+
+    fun saveSession(context: Context, username: String, email: String) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit()
+            .putBoolean(KEY_IS_LOGGED_IN, true)
+            .putString(KEY_USERNAME, username)
+            .putString(KEY_EMAIL, email)
+            .apply()
+    }
+
+    fun clearSession(context: Context) {
         currentUser = null
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().clear().apply()
     }
 
     fun isLoggedIn(): Boolean = currentUser != null
 
     fun getCurrentUsername(): String = currentUser?.username ?: ""
 
-    fun registerUser(username: String, pass: String): UserAccount {
+    fun registerUser(context: Context, username: String, pass: String): UserAccount {
         val user = UserAccount(
             username = username,
             password = pass,
@@ -61,10 +90,11 @@ object UserSessionManager {
         )
         registeredAccounts.add(user)
         currentUser = user
+        saveSession(context, username, user.email)
         return user
     }
 
-    fun loginUser(identifier: String, pass: String): Pair<Boolean, String> {
+    fun loginUser(context: Context, identifier: String, pass: String): Pair<Boolean, String> {
         val match = registeredAccounts.find {
             (it.email.isNotEmpty() && it.email.equals(identifier, ignoreCase = true)) ||
             (it.phone.isNotEmpty() && it.phone.equals(identifier, ignoreCase = true)) ||
@@ -74,6 +104,7 @@ object UserSessionManager {
         return if (match != null) {
             if (match.password == pass) {
                 currentUser = match
+                saveSession(context, match.username, match.email)
                 Pair(true, "Account found — redirecting...")
             } else {
                 Pair(false, "Incorrect password.")
@@ -83,8 +114,8 @@ object UserSessionManager {
         }
     }
 
-    fun logout() {
-        currentUser = null
+    fun logout(context: Context) {
+        clearSession(context)
     }
 
     fun generateOrderId(): String {
@@ -134,9 +165,10 @@ object UserSessionManager {
         return Pair(true, "Password changed successfully")
     }
 
-    fun changeUsername(newUsername: String): Pair<Boolean, String> {
+    fun changeUsername(context: Context, newUsername: String): Pair<Boolean, String> {
         val user = currentUser ?: return Pair(false, "No active user session")
         user.username = newUsername
+        saveSession(context, newUsername, user.email)
         return Pair(true, "Username updated to $newUsername")
     }
 

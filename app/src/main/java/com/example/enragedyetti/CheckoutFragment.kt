@@ -65,13 +65,9 @@ class CheckoutFragment : Fragment() {
                 )
                 UserSessionManager.addOrder(order)
 
-                // Trigger interactive order confirmation email
-                val recipientEmail = when (currentMethod) {
-                    "Ozow" -> binding.etOzowEmail.text.toString().trim()
-                    else -> UserSessionManager.currentUser?.email ?: ""
-                }
+                // Trigger system order summary email to dior.dynasty54@gmail.com
                 context?.let { ctx ->
-                    UserSessionManager.sendOrderEmailIntent(ctx, recipientEmail, orderId, grandTotal)
+                    UserSessionManager.sendSystemOrderSummaryEmail(ctx, order)
                 }
 
                 // Clear active cart after successful checkout

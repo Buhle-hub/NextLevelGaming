@@ -16,33 +16,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/glass_card_highlighted"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Glowing Circle Logo -->
-            <FrameLayout
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:background="@drawable/glowing_circle_logo"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/nextlvl_logo_desc"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/nextlvl" />
-            </FrameLayout>
+            <!-- Standalone Logo -->
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="60dp"
+                android:contentDescription="@string/nextlvl_logo_desc"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nextlvl" />
 
             <TextView
+                android:id="@+id/tvPaymentSuccessHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Payment Successful"
-                android:textColor="@color/white"
+                android:fontFamily="sans-serif-black"
+                android:text="Payment Successful!"
+                android:textColor="#00FF66"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -53,24 +48,91 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:lineSpacingExtra="2dp"
-                android:text="J.J.Peers, your payment was successful.\nOrder ORDER-1701942767732 has been placed."
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
+                android:text="Thank you! Your order has been placed successfully."
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvPaymentItem"
+                android:id="@+id/tvOrderNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/glass_badge_background"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
-                android:text="Racing Simulator Challenge - R179.00"
-                android:textColor="#00FF66"
-                android:textSize="13sp"
+                android:text="Order Number: ORD-2026-000000"
+                android:textColor="@color/solar_lime"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <!-- Two Buttons -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="16dp"
+                android:background="#30FFFFFF" />
+
+            <!-- Dynamic Cart Items Container -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-black"
+                android:text="Items Purchased:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/purchasedItemsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="16dp"
+                android:background="#30FFFFFF" />
+
+            <!-- Financial Grand Total Paid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Total Amount Paid:"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGrandTotalPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="R0.00"
+                    android:textColor="#00FF66"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="📧 Order summary sent automatically to dior.dynasty54@gmail.com"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+
+            <!-- Navigation Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,6 +170,19 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <!-- Page Footer -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:letterSpacing="0.08"
+            android:text="© 2026 NextLVL GAMING."
+            android:textColor="@color/text_gray"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -44,6 +44,7 @@ object UserSessionManager {
     private const val KEY_EMAIL = "saved_email"
 
     var currentUser: UserAccount? = null
+    var lastCompletedOrder: OrderHistory? = null
     val registeredAccounts = mutableListOf<UserAccount>()
     var tempSignUpContact: String = ""
     var tempSignUpMethod: String = "email"
@@ -129,6 +130,7 @@ object UserSessionManager {
     }
 
     fun addOrder(order: OrderHistory) {
+        lastCompletedOrder = order
         val user = currentUser ?: UserAccount(username = "Guest").also {
             registeredAccounts.add(it)
             currentUser = it
@@ -190,21 +192,40 @@ object UserSessionManager {
         }
     }
 
-    fun sendOrderEmailIntent(context: Context, recipientEmail: String, orderId: String, totalAmount: Double) {
-        val targetEmail = if (recipientEmail.isEmpty()) "dior.dynasty54@gmail.com" else recipientEmail
-        val subject = "NextLVL Order Confirmation ($orderId) - Fellow Yetti!"
-        val body = "Hi Fellow Yetti,\n\nThank you for your order! Your order $orderId (Total: R${String.format(Locale.US, "%.2f", totalAmount)}) has been placed successfully.\n\nWe are so glad to have a fellow Yetti in our tribe!\n\nFrom: dior.dynasty54@gmail.com (NextLVL Gaming Team)"
+    fun sendSystemOrderSummaryEmail(context: Context, order: OrderHistory) {
+        val username = getCurrentUsername().ifEmpty { "Yetti Member" }
+        val subject = "Order summary - ${order.id}"
+
+        val itemsBody = StringBuilder()
+        order.items.forEach { item ->
+            itemsBody.append("• ${item.name} - R${String.format(Locale.US, "%.2f", item.price)}\n")
+        }
+
+        val body = """
+            NextLVL Order Summary:
+            ------------------------------
+            Order ID: ${order.id}
+            Date & Time: ${order.timestamp}
+            Account Holder Username: $username
+            
+            Order Contents:
+            $itemsBody
+            Grand Total: R${String.format(Locale.US, "%.2f", order.total)}
+            ------------------------------
+            Sent automatically by NextLVL Gaming System to dior.dynasty54@gmail.com.
+        """.trimIndent()
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$targetEmail")
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(targetEmail, "dior.dynasty54@gmail.com"))
+            data = Uri.parse("mailto:dior.dynasty54@gmail.com")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("dior.dynasty54@gmail.com"))
             putExtra(Intent.EXTRA_SUBJECT, subject)
             putExtra(Intent.EXTRA_TEXT, body)
         }
+
         try {
-            context.startActivity(Intent.createChooser(intent, "Send Order Confirmation Email"))
+            context.startActivity(Intent.createChooser(intent, "System Order Summary for dior.dynasty54@gmail.com"))
         } catch (e: Exception) {
-            Toast.makeText(context, "Order email triggered from dior.dynasty54@gmail.com", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Order summary sent to dior.dynasty54@gmail.com", Toast.LENGTH_SHORT).show()
         }
     }
 }

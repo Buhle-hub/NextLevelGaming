@@ -188,7 +188,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="★ 4.9"
+                            android:text="4.9"
                             android:textColor="#00FF66"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -280,7 +280,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="★ 4.8"
+                            android:text="4.8"
                             android:textColor="#00FF66"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -347,7 +347,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-black"
-                    android:text="🏆 Arena Championship 2026"
+                    android:text="Arena Championship 2026"
                     android:textColor="@color/solar_lime"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -450,7 +450,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="★ 4.8 • R1,299.00 • In Stock"
+                    android:text="Rating 4.8 • R1,299.00 • In Stock"
                     android:textColor="#00FF66"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -516,7 +516,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="★ 4.9 • R1,799.00 • VIP Edition"
+                    android:text="Rating 4.9 • R1,799.00 • VIP Edition"
                     android:textColor="#00FF66"
                     android:textSize="13sp" />
             </LinearLayout>

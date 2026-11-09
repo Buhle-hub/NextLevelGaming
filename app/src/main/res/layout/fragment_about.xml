@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🏆 Our Vision"
+                android:text="Our Vision"
                 android:textColor="#00FF66"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -161,7 +161,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⚡ Established Heritage"
+                android:text="Established Heritage"
                 android:textColor="#00FF66"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👑 Leadership"
+                android:text="Leadership"
                 android:textColor="#00FF66"
                 android:textSize="16sp"
                 android:textStyle="bold" />

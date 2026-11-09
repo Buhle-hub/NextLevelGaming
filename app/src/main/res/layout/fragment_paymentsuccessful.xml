@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:text="📧 Order summary sent automatically to dior.dynasty54@gmail.com"
+                android:text="Order summary sent automatically to dior.dynasty54@gmail.com"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 

@@ -1,11 +1,11 @@
 package com.example.enragedyetti
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.enragedyetti.databinding.FragmentHomeBinding
@@ -26,36 +26,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Category Filter Pills -> Navigate to Products Catalog
-        val pills = listOf(binding.pillAll, binding.pillPackages, binding.pillExperiences, binding.pillMerch, binding.pillEsports)
-        pills.forEach { pill ->
-            pill.setOnClickListener {
-                pills.forEach { p ->
-                    p.isSelected = false
-                    p.setTextColor(Color.WHITE)
-                }
-                pill.isSelected = true
-                pill.setTextColor(Color.BLACK)
-
-                // Navigate directly to Products catalog on pill selection
-                findNavController().navigate(R.id.ProductsFragment)
-            }
-        }
+        // 1. Category Filter Pills -> Navigate directly to dedicated heading in Products Fragment
+        binding.pillAll.setOnClickListener { navigateToProductsSection("") }
+        binding.pillPackages.setOnClickListener { navigateToProductsSection("packages") }
+        binding.pillExperiences.setOnClickListener { navigateToProductsSection("experiences") }
+        binding.pillMerch.setOnClickListener { navigateToProductsSection("merch") }
+        binding.pillEsports.setOnClickListener { navigateToProductsSection("packages") }
 
         // 2. "On the Horizon" Carousel Cards & Action Buttons
-        binding.cardHeroPass.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
-        binding.btnHeroViewPass.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
+        binding.cardHeroPass.setOnClickListener { navigateToProductsSection("packages") }
+        binding.btnHeroViewPass.setOnClickListener { navigateToProductsSection("packages") }
 
-        binding.cardHeroArena.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
-        binding.btnHeroViewArena.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
+        binding.cardHeroArena.setOnClickListener { navigateToProductsSection("experiences") }
+        binding.btnHeroViewArena.setOnClickListener { navigateToProductsSection("experiences") }
 
         // 3. Live Event Banner -> Navigates to Enquiry / Booking
         binding.cardLiveEvent.setOnClickListener {
@@ -63,25 +46,22 @@ class HomeFragment : Fragment() {
         }
 
         // 4. Section Headers & List Items
-        binding.btnSeeAllProducts.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
+        binding.btnSeeAllProducts.setOnClickListener { navigateToProductsSection("") }
 
-        binding.itemRowKeyboard.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
+        binding.itemRowKeyboard.setOnClickListener { navigateToProductsSection("merch") }
         binding.btnViewProducts.setOnClickListener {
             CartManager.addItem(CartItem("Pro RGB Mechanical Keyboard Set", 1299.0, R.drawable.keyboard_set))
             Toast.makeText(context, "Added Pro RGB Keyboard Set to Cart!", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.CartFragment)
         }
 
-        binding.itemRowPuffer.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
-        binding.btnLearnMore.setOnClickListener {
-            findNavController().navigate(R.id.ProductsFragment)
-        }
+        binding.itemRowPuffer.setOnClickListener { navigateToProductsSection("merch") }
+        binding.btnLearnMore.setOnClickListener { navigateToProductsSection("merch") }
+    }
+
+    private fun navigateToProductsSection(sectionKey: String) {
+        val bundle = bundleOf("targetSection" to sectionKey)
+        findNavController().navigate(R.id.ProductsFragment, bundle)
     }
 
     override fun onDestroyView() {

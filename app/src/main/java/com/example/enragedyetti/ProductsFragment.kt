@@ -23,6 +23,18 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Scroll to target section heading if passed from Home screen
+        val targetSection = arguments?.getString("targetSection") ?: ""
+        if (targetSection.isNotEmpty()) {
+            binding.root.post {
+                when (targetSection) {
+                    "packages" -> binding.root.smoothScrollTo(0, binding.headerPackages.top)
+                    "experiences" -> binding.root.smoothScrollTo(0, binding.headerExperiences.top)
+                    "merch" -> binding.root.smoothScrollTo(0, binding.headerMerch.top)
+                }
+            }
+        }
+
         // Gaming Packages
         binding.btnAddUltimate.setOnClickListener {
             handleAddToCart(it as MaterialButton, CartItem("Ultimate Gamer Pass", 499.0, R.drawable.memberships_pic))
@@ -75,9 +87,9 @@ class ProductsFragment : Fragment() {
         // Add to CartManager
         CartManager.addItem(item)
 
-        // Updated button feedback: Change text to "✓ Added" for 1.2s
+        // Updated button feedback: Change text to "Added to Cart" for 1.2s
         val originalText = button.text
-        button.text = "✓ Added"
+        button.text = "Added to Cart"
         Handler(Looper.getMainLooper()).postDelayed({
             if (_binding != null) {
                 button.text = originalText

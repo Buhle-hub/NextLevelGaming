@@ -63,7 +63,12 @@
         android:id="@+id/ProductsFragment"
         android:name="com.example.enragedyetti.ProductsFragment"
         android:label="Products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products">
+        <argument
+            android:name="targetSection"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
 
     <fragment
         android:id="@+id/AboutFragment"

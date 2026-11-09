@@ -200,7 +200,7 @@
                 android:background="@drawable/glass_badge_background"
                 android:gravity="center"
                 android:paddingVertical="6dp"
-                android:text="🚚 Delivery: 2-3 Business Days • Free Returns"
+                android:text="Express Delivery: 2-3 Business Days • Free Returns"
                 android:textColor="@color/solar_lime"
                 android:textSize="11sp"
                 android:textStyle="bold" />

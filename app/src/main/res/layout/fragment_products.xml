@@ -66,8 +66,9 @@
         </LinearLayout>
 
 
-        <!-- SECTION 1: GAMING PACKAGES -->
+        <!-- SECTION 1: GAMING PACKAGES HEADING -->
         <TextView
+            android:id="@+id/headerPackages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -307,8 +308,9 @@
         </LinearLayout>
 
 
-        <!-- SECTION 2: INDIVIDUAL EXPERIENCES -->
+        <!-- SECTION 2: INDIVIDUAL EXPERIENCES HEADING -->
         <TextView
+            android:id="@+id/headerExperiences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -491,8 +493,9 @@
         </LinearLayout>
 
 
-        <!-- SECTION 3: OFFICIAL MERCHANDISE (WITH DESIGNATED PICTURES) -->
+        <!-- SECTION 3: OFFICIAL MERCHANDISE HEADING -->
         <TextView
+            android:id="@+id/headerMerch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -861,60 +864,6 @@
                     android:textStyle="bold"
                     app:backgroundTint="@null" />
             </LinearLayout>
-        </LinearLayout>
-
-        <!-- Behance Reviews Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Reviews"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/behance_card_bg"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Jamiro Hex"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="★ 4.8"
-                    android:textColor="#00FF66"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:lineSpacingExtra="2dp"
-                android:text="Great graphics, incredible gaming equipment, and simple booking flow! Maximum replay value."
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
         </LinearLayout>
 
         <!-- Page Footer -->

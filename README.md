@@ -107,6 +107,27 @@ Enragedyetti/
 4. **Run Application**:
    - Connect an Android device via USB with debugging enabled, or start an Android Virtual Device (AVD).
    - Click **Run 'app'** (`Shift + F10`).
+   - Figma links for high-fidelity wireframes: 
+
+https://www.figma.com/make/dRCVbd4HXJnVPvqACn6Bwp/High-fidelity-gaming-website-wireframes?p=f&t=5Ui97jZpd3256zn1-0 
+
+https://www.figma.com/design/KWL1iX6kaTlmaXrjhdERe2/Untitled?node-id=0-1&p=f&t=6ztFOnk3xl9LZiQ6-0 
+
+https://www.figma.com/design/KWL1iX6kaTlmaXrjhdERe2/Untitled?node-id=0-1&p=f&t=6ztFOnk3xl9LZiQ6-0 
+
+https://www.figma.com/design/YKWc6fLjDxhtKZZM7EJMTw/NextLvL?node-id=13-75&p=f&t=J48k16HylUmMXDNa-0 
+
+https://www.figma.com/design/YKWc6fLjDxhtKZZM7EJMTw/NextLvL?node-id=13-75&p=f&t=9mDBZTZrPwyE5xxQ-0 
+
+https://www.figma.com/design/YKWc6fLjDxhtKZZM7EJMTw/NextLvL?node-id=13-75&p=f&t=i4cGlUrjoQPdVwk1-0 
+
+https://www.figma.com/design/YKWc6fLjDxhtKZZM7EJMTw/NextLvL?node-id=0-1&p=f&t=bTljxMhHLqR9ZcOh-0 
+
+App and website links: 
+
+https://next-lvl-kappa.vercel.app/ 
+
+https://github.com/J5Molapo/NextLVL_Gaming-Website
 
 ---
 
